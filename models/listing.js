@@ -2,11 +2,6 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const Review = require("./review");
 
-const imageSchema = new Schema({
-    filename: String,
-    url: String,
-});
-
 const listingSchema = new Schema({
     title: {
         type: String,
@@ -16,7 +11,16 @@ const listingSchema = new Schema({
         type: String,
         required: true,
     },
-    image: imageSchema,
+    image: {
+        url: {
+            type: String,
+            required: true,
+        },
+        filename: {
+            type: String,
+            required: true,
+        },
+    },
     price: {
         type: Number,
         required: true,
@@ -39,9 +43,20 @@ const listingSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User",
     },
+    geometry:{
+        type: {
+          type: String, // Don't do `{ location: { type: String } }`
+          enum: ['Point'], // 'location.type' must be 'Point'
+          required: true
+        },
+        coordinates: {
+          type: [Number],
+          required: true
+        }
+      }
 });
 
-// Cascade delete reviews when a listing is deleted
+
 listingSchema.post("findOneAndDelete", async function (listing) {
     if (listing) {
         await Review.deleteMany({ _id: { $in: listing.reviews } });

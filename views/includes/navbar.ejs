@@ -1,25 +1,87 @@
+<style>
+.search-button {
+  border-radius: 90%;
+  color: rgb(254, 66, 77);
+  padding: 10px 15px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: rgb(254, 66, 77);
+  color: white;
+}
+
+.form-search-bar {
+  width: 800px;
+  max-width: 90%;
+  border-radius: 20px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .form-search-bar {
+    width: 600px;
+  }
+
+  .search-button {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-search-bar {
+    width: 100%;
+  }
+
+  .search-button {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-search-bar {
+    width: 90%;
+  }
+
+  .search-button {
+    font-size: 10px;
+    padding: 5px 8px;
+  }
+}
+</style>
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/listings"><i class="fa-solid fa-mountain-city"></i></a>
+  <div class="container-fluid">
+      <a class="navbar-brand" href="/listings">
+          <i class="fa-solid fa-mountain-city"></i>
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
-        <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link" href="/">Home</a>
-          <a class="nav-link" href="/listings">All Listings</a>
-          <a class="nav-link" href="/listings/new">Add new Listing</a>
-        </div>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav ms-auto">
-          <% if(!currUser){ %>
-            <a class="nav-link" href="/signup">Signup</a>
-            <a class="nav-link" href="/login">Login</a>
-          <% } %>
-          <% if(currUser){ %>
-          <a class="nav-link" href="/logout">Log out</a>
-          <% } %>
-        </div>
+          <div class="navbar-nav">
+              <a class="nav-link" href="/listings" style="font-size: 20px;"><b>Explore</b></a>
+          </div>
+          
+          <form class="d-flex ms-auto me-3">
+              <input class="form-control me-2 form-search-bar" type="search" placeholder="Find homes from around the world">
+              <button class="btn btn-outline-success search-button" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+          </form>
+          
+          <div class="navbar-nav ms-auto">
+              <a class="nav-link" href="/listings/new"><b>Add new Listing</b></a>
+              <% if(!currUser){ %>
+                  <a class="nav-link" href="/signup"><b>Signup</b></a>
+                  <a class="nav-link" href="/login"><b>Login</b></a>
+              <% } %>
+              <% if(currUser){ %>
+                  <a class="nav-link" href="/logout">Log out</a>
+              <% } %>
+          </div>
       </div>
-    </div>
-  </nav>
+  </div>
+</nav>
